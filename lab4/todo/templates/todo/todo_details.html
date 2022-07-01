@@ -1,0 +1,28 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}TODO details{% endblock %}
+
+{% block body_content %}
+<div class="card my-3" style="color: black;">
+    <h5 class="card-header">TODO Info</h5>
+    <div class="card-body">
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Name: </span>
+            <p class="card-text">{{my_todo.name | title}}</p>
+        </div>
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Priority: </span>
+            <p class="card-text">{{my_todo.priority}}</p>
+        </div>
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Description: </span>
+            <p class="card-text">{{my_todo.description}}</p>
+        </div>
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Finished: </span>
+            <p class="card-text">{{my_todo.is_done}}</p>
+        </div>
+    </div>
+    <a href="{% url 'todo:home' %}" class="btn btn-secondary">Back Home</a>
+</div>
+{% endblock %}

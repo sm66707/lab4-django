@@ -1,0 +1,39 @@
+{% extends 'general_templates/base.html' %}
+
+{% block title %}Actors List{% endblock %}
+{% block body_content %}
+<h1 align="center">Actors List</h1>
+
+<table class="table table-bordered table-hover" style="color: white;">
+    <thead align="center" style="color: green; font-weight: bold; font-size: larger;">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Profile Picture</th>
+            <th><a class="btn btn-success" href="{% url 'actor:create' %}">Add Actor</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for actor in actors %}
+        <tr>
+            <td>{{ actor.id }}</td>
+            <td>{{ actor|title }}</td>
+            <td>{{ actor.gender }}</td>
+            <td>
+                <center>
+                    <img height="20%" width="20%" src="{{request.scheme}}://{{request.get_host}}{{actor.profile_pic.url}}">
+                </center>
+            </td>
+            <td>
+                <center>
+                    <a href="{% url 'actor:details' actor.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'actor:update' actor.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'actor:delete' actor.id %}" class="btn btn-danger">Delete</a>
+                </center>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

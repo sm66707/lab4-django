@@ -1,0 +1,10 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}TODO edit{% endblock %}
+
+{% block body_content %}
+<div class="card bg-info" style="width: 25rem;">
+    <h4>Coming Soon...</h4>
+    <a href="{% url 'todo:update' my_todo %}" class="btn btn-success">update</a>    
+</div>
+{% endblock %}

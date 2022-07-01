@@ -1,0 +1,35 @@
+{% extends 'general_templates/base.html' %}
+
+{% block title %}Movie details{% endblock %}
+
+{% block body_content %}
+<div class="card my-3" style="color: black;">
+    <h5 class="card-header">Movie Info</h5>
+    <div class="card-body">
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Name: </span>
+            <p class="card-text">{{movie.name | title}}</p>
+        </div>
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Production Year: </span>
+            <p class="card-text">{{movie.production_year}}</p>
+        </div>
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Actors: </span>
+            <p class="card-text">
+                <ul>
+                    {% for actor in movie.actors.all %}
+                        <li>{{ actor }}</li>
+                    {% endfor %}
+                </ul>
+            </p>
+
+        </div>
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Director: </span>
+            <p class="card-text">{{movie.director}}</p>
+        </div>
+    </div>
+    <a href="{% url 'movie:list' %}" class="btn btn-secondary">Back Home</a>
+</div>
+{% endblock %}

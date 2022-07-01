@@ -1,0 +1,37 @@
+{% extends 'general_templates/base.html' %}
+
+{% block title %}Movies List{% endblock %}
+{% block body_content %}
+<h1 align="center">Movies List</h1>
+
+<table class="table table-bordered table-hover" style="color: white;">
+    <thead align="center" style="color: green; font-weight: bold; font-size: larger;">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Production Year</th>
+            <th>Director</th>
+            <th><a class="btn btn-success" href="{% url 'movie:create' %}">Add Movie</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movie in movies %}
+        <tr>
+            <td>{{ movie.id }}</td>
+            <td>{{ movie|title }}</td>
+            <td>{{ movie.production_year }}</td>
+            <td>{{ movie.director }}</td>
+            {% if request.user.is_authenticated %}
+            <td>
+                <center>
+                    <a href="{% url 'movie:details' movie.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'movie:update' movie.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'movie:delete' movie.id %}" class="btn btn-danger">Delete</a>
+                </center>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

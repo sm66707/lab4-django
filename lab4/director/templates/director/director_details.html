@@ -1,0 +1,21 @@
+{% extends 'general_templates/base.html' %}
+
+{% block title %}Director details{% endblock %}
+
+{% block body_content %}
+<div class="card my-3" style="color: black;">
+    <h5 class="card-header">Director Info</h5>
+    <div class="card-body">
+        <img height="20%" width="20%" src="{{request.scheme}}://{{request.get_host}}{{director.profile_pic.url}}">
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Name: </span>
+            <p class="card-text">{{director.name | title}}</p>
+        </div>
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold">Gender: </span>
+            <p class="card-text">{{director.gender}}</p>
+        </div>
+    </div>
+    <a href="{% url 'director:list' %}" class="btn btn-secondary">Back Home</a>
+</div>
+{% endblock %}

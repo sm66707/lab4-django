@@ -1,0 +1,49 @@
+{% extends 'todo/base.html' %}
+{% load custom_tags %}
+
+{% block title %}TODO List{% endblock %}
+{% block body_content %}
+<h1 align="center">TODO List</h1>
+{% comment %}
+{% my_custom_tag as my_var %}
+My var: {{my_var}}
+{% endcomment %}
+{% if warning_message %}
+<div align="center" class="alert alert-warning">{{warning_message}}</div>
+{% endif %}
+<table class="table table-bordered table-hover" style="color: white;">
+    <thead align="center" style="color: green; font-weight: bold; font-size: larger;">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Priority</th>
+            <th>Finished</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for todo, value in my_todo_list.items %}
+        <tr>
+            <td>{{ todo|upper }}</td>
+            <td>{{ value.name|title }}</td>
+            <td>{{ value.priority }}</td>
+            <td>{{ value.is_done|title }}</td>
+            <td>{{ value.description|my_filter }}</td>
+            <td>
+                <center>
+                    <a href="{% url 'todo:details' todo %}" class="btn btn-info">View</a>
+                    <a href="{% url 'todo:edit' todo %}" class="btn btn-primary">Edit</a>
+                    {% if value.is_done == False %}
+                    <a href="{% url 'todo:done' todo %}" class="btn btn-success">Done</a>
+                    {% else %}
+                    <a href="{% url 'todo:undone' todo %}" class="btn btn-warning">Undone</a>
+                    {% endif %}
+                    <a href="{% url 'todo:delete' todo %}" class="btn btn-danger">Delete</a>
+                </center>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
